@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Playfair Display", "Libre Baskerville", "Georgia", serif;
+  --font-sans: "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", monospace;
+
+  /* Kamelizer palette — warm cream canvas, deep coffee ground, electric blue accent. */
+  --c-canvas: 244 236 221;   /* #F4ECDD warm cream  */
+  --c-ground: 42 26 15;      /* #2A1A0F deep coffee */
+  color-scheme: light;
+}
+
+html,
+body {
+  background: rgb(var(--c-canvas));
+  color: rgb(var(--c-ground));
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #3FA9F5;
+  color: #ffffff;
+}
+
+@layer components {
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-ground/20 px-4 py-1.5 text-[11px] uppercase tracking-ultra font-normal;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ground px-7 py-3.5 text-[12px] font-normal uppercase tracking-[0.3em] text-canvas transition active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none;
+  }
+  .btn-primary:hover {
+    background-color: #3FA9F5;
+    color: #ffffff;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ground/30 px-7 py-3.5 text-[12px] font-normal uppercase tracking-[0.3em] text-ground transition hover:bg-ground hover:text-canvas active:scale-[0.98];
+  }
+  .btn-mini {
+    @apply inline-flex items-center justify-center rounded-full border border-ground/30 px-3 py-1 text-[10px] uppercase tracking-[0.25em] font-normal;
+  }
+  .field {
+    @apply w-full rounded-none border-0 border-b border-ground/30 bg-transparent px-0 py-3 text-[15px] font-light text-ground placeholder:text-ground/30 focus:outline-none;
+  }
+  .field:focus {
+    border-color: #3FA9F5;
+  }
+  /* Editorial display — Playfair Display at the LIGHTEST available weight (400),
+     with tight tracking and loose leading for a vintage magazine register. */
+  .editorial {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    font-feature-settings: "lnum", "kern", "liga";
+  }
+  .editorial em {
+    font-style: italic;
+    font-weight: 400;
+  }
+  .display-line {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.015em;
+  }
+  .eyebrow {
+    @apply text-[11px] uppercase tracking-ultra text-ground/50 font-normal;
+  }
+}
+
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(42,26,15,0.6) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(42,26,15,0.4) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+}
+
+.scroll-hide::-webkit-scrollbar { display: none; }
+.scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
